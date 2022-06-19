@@ -1,0 +1,938 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="sirketModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="birim">
+          <Key>
+            <PropertyRef Name="birim_no" />
+          </Key>
+          <Property Name="birim_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="birim_ad" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cocuk">
+          <Key>
+            <PropertyRef Name="cocuk_no" />
+          </Key>
+          <Property Name="cocuk_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="soyad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="cinsiyet" Type="char" MaxLength="1" />
+          <Property Name="dogum_tarihi" Type="date" Nullable="false" />
+          <Property Name="dogu_yeri" Type="int" Nullable="false" />
+          <Property Name="personel_no" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="gorevlendirme">
+          <Key>
+            <PropertyRef Name="gorevlendirme_no" />
+          </Key>
+          <Property Name="gorevlendirme_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="proje_no" Type="int" Nullable="false" />
+          <Property Name="personel_no" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="il">
+          <Key>
+            <PropertyRef Name="il_no" />
+          </Key>
+          <Property Name="il_no" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="il_ad" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ilce">
+          <Key>
+            <PropertyRef Name="ilce_no" />
+          </Key>
+          <Property Name="ilce_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ilce_ad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="il_no" Type="char" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="KategoriID" />
+          </Key>
+          <Property Name="KategoriID" Type="int" Nullable="false" />
+          <Property Name="KategoriAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tanim" Type="ntext" />
+        </EntityType>
+        <EntityType Name="personel">
+          <Key>
+            <PropertyRef Name="personel_no" />
+          </Key>
+          <Property Name="personel_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="soyad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="cinsiyet" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="dogum_tarihi" Type="date" Nullable="false" />
+          <Property Name="dogum_yeri" Type="int" Nullable="false" />
+          <Property Name="baslama_tarihi" Type="date" Nullable="false" />
+          <Property Name="birim_no" Type="int" Nullable="false" />
+          <Property Name="unvan_no" Type="int" Nullable="false" />
+          <Property Name="calisma_saati" Type="tinyint" Nullable="false" />
+          <Property Name="maas" Type="money" Nullable="false" />
+          <Property Name="prim" Type="money" />
+        </EntityType>
+        <EntityType Name="proje">
+          <Key>
+            <PropertyRef Name="proje_no" />
+          </Key>
+          <Property Name="proje_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="proje_ad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="baslama_tarihi" Type="date" Nullable="false" />
+          <Property Name="planlanan_bitis_tarihi" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tedarikciler">
+          <Key>
+            <PropertyRef Name="TedarikciID" />
+          </Key>
+          <Property Name="TedarikciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SirketAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="MusteriAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="60" />
+          <Property Name="Sehir" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="unvan">
+          <Key>
+            <PropertyRef Name="unvan_no" />
+          </Key>
+          <Property Name="unvan_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="unvan_ad" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="UrunID" />
+          </Key>
+          <Property Name="UrunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunAdi" Type="nvarchar" MaxLength="40" />
+          <Property Name="TedarikciID" Type="int" />
+          <Property Name="KategoriID" Type="int" />
+          <Property Name="BirimFiyati" Type="int" />
+        </EntityType>
+        <Association Name="FK__cocuk__dogu_yeri__286302EC">
+          <End Role="ilce" Type="Self.ilce" Multiplicity="1" />
+          <End Role="cocuk" Type="Self.cocuk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ilce">
+              <PropertyRef Name="ilce_no" />
+            </Principal>
+            <Dependent Role="cocuk">
+              <PropertyRef Name="dogu_yeri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cocuk__personel___29572725">
+          <End Role="personel" Type="Self.personel" Multiplicity="1" />
+          <End Role="cocuk" Type="Self.cocuk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personel">
+              <PropertyRef Name="personel_no" />
+            </Principal>
+            <Dependent Role="cocuk">
+              <PropertyRef Name="personel_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__gorevlend__perso__2E1BDC42">
+          <End Role="personel" Type="Self.personel" Multiplicity="1" />
+          <End Role="gorevlendirme" Type="Self.gorevlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personel">
+              <PropertyRef Name="personel_no" />
+            </Principal>
+            <Dependent Role="gorevlendirme">
+              <PropertyRef Name="personel_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__gorevlend__proje__2D27B809">
+          <End Role="proje" Type="Self.proje" Multiplicity="1" />
+          <End Role="gorevlendirme" Type="Self.gorevlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proje">
+              <PropertyRef Name="proje_no" />
+            </Principal>
+            <Dependent Role="gorevlendirme">
+              <PropertyRef Name="proje_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ilce__il_no__1BFD2C07">
+          <End Role="il" Type="Self.il" Multiplicity="1" />
+          <End Role="ilce" Type="Self.ilce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="il">
+              <PropertyRef Name="il_no" />
+            </Principal>
+            <Dependent Role="ilce">
+              <PropertyRef Name="il_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__personel__birim___22AA2996">
+          <End Role="birim" Type="Self.birim" Multiplicity="1" />
+          <End Role="personel" Type="Self.personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="birim">
+              <PropertyRef Name="birim_no" />
+            </Principal>
+            <Dependent Role="personel">
+              <PropertyRef Name="birim_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__personel__dogum___21B6055D">
+          <End Role="ilce" Type="Self.ilce" Multiplicity="1" />
+          <End Role="personel" Type="Self.personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ilce">
+              <PropertyRef Name="ilce_no" />
+            </Principal>
+            <Dependent Role="personel">
+              <PropertyRef Name="dogum_yeri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__personel__unvan___239E4DCF">
+          <End Role="unvan" Type="Self.unvan" Multiplicity="1" />
+          <End Role="personel" Type="Self.personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unvan">
+              <PropertyRef Name="unvan_no" />
+            </Principal>
+            <Dependent Role="personel">
+              <PropertyRef Name="unvan_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Kategoriler">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="0..1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="KategoriID" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="TedarikciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Kategoriler1">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="0..1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="KategoriID" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Tedarikciler">
+          <End Role="Tedarikciler" Type="Self.Tedarikciler" Multiplicity="0..1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tedarikciler">
+              <PropertyRef Name="TedarikciID" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="TedarikciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spgeturun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spguncelle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vurunid" Type="int" Mode="In" />
+          <Parameter Name="vurunadi" Type="nvarchar" Mode="In" />
+          <Parameter Name="vtedid" Type="int" Mode="In" />
+          <Parameter Name="vkatid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spurunara" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="urunadi" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="spurunekle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vurunad" Type="nvarchar" Mode="In" />
+          <Parameter Name="vtedid" Type="int" Mode="In" />
+          <Parameter Name="vkatid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spurunsilme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="vurunid" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="sirketModelStoreContainer">
+          <EntitySet Name="birim" EntityType="Self.birim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cocuk" EntityType="Self.cocuk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="gorevlendirme" EntityType="Self.gorevlendirme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="il" EntityType="Self.il" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ilce" EntityType="Self.ilce" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personel" EntityType="Self.personel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proje" EntityType="Self.proje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tedarikciler" EntityType="Self.Tedarikciler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="unvan" EntityType="Self.unvan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__cocuk__dogu_yeri__286302EC" Association="Self.FK__cocuk__dogu_yeri__286302EC">
+            <End Role="ilce" EntitySet="ilce" />
+            <End Role="cocuk" EntitySet="cocuk" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cocuk__personel___29572725" Association="Self.FK__cocuk__personel___29572725">
+            <End Role="personel" EntitySet="personel" />
+            <End Role="cocuk" EntitySet="cocuk" />
+          </AssociationSet>
+          <AssociationSet Name="FK__gorevlend__perso__2E1BDC42" Association="Self.FK__gorevlend__perso__2E1BDC42">
+            <End Role="personel" EntitySet="personel" />
+            <End Role="gorevlendirme" EntitySet="gorevlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="FK__gorevlend__proje__2D27B809" Association="Self.FK__gorevlend__proje__2D27B809">
+            <End Role="proje" EntitySet="proje" />
+            <End Role="gorevlendirme" EntitySet="gorevlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ilce__il_no__1BFD2C07" Association="Self.FK__ilce__il_no__1BFD2C07">
+            <End Role="il" EntitySet="il" />
+            <End Role="ilce" EntitySet="ilce" />
+          </AssociationSet>
+          <AssociationSet Name="FK__personel__birim___22AA2996" Association="Self.FK__personel__birim___22AA2996">
+            <End Role="birim" EntitySet="birim" />
+            <End Role="personel" EntitySet="personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__personel__dogum___21B6055D" Association="Self.FK__personel__dogum___21B6055D">
+            <End Role="ilce" EntitySet="ilce" />
+            <End Role="personel" EntitySet="personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__personel__unvan___239E4DCF" Association="Self.FK__personel__unvan___239E4DCF">
+            <End Role="unvan" EntitySet="unvan" />
+            <End Role="personel" EntitySet="personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Kategoriler" Association="Self.FK_Urunler_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Kategoriler1" Association="Self.FK_Urunler_Kategoriler1">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Tedarikciler" Association="Self.FK_Urunler_Tedarikciler">
+            <End Role="Tedarikciler" EntitySet="Tedarikciler" />
+            <End Role="Urunler" EntitySet="Urunler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sirketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="birim">
+          <Key>
+            <PropertyRef Name="birim_no" />
+          </Key>
+          <Property Name="birim_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="birim_ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="personels" Relationship="Self.FK__personel__birim___22AA2996" FromRole="birim" ToRole="personel" />
+        </EntityType>
+        <EntityType Name="cocuk">
+          <Key>
+            <PropertyRef Name="cocuk_no" />
+          </Key>
+          <Property Name="cocuk_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soyad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cinsiyet" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="dogum_tarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dogu_yeri" Type="Int32" Nullable="false" />
+          <Property Name="personel_no" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ilce" Relationship="Self.FK__cocuk__dogu_yeri__286302EC" FromRole="cocuk" ToRole="ilce" />
+          <NavigationProperty Name="personel" Relationship="Self.FK__cocuk__personel___29572725" FromRole="cocuk" ToRole="personel" />
+        </EntityType>
+        <EntityType Name="gorevlendirme">
+          <Key>
+            <PropertyRef Name="gorevlendirme_no" />
+          </Key>
+          <Property Name="gorevlendirme_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="proje_no" Type="Int32" Nullable="false" />
+          <Property Name="personel_no" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="personel" Relationship="Self.FK__gorevlend__perso__2E1BDC42" FromRole="gorevlendirme" ToRole="personel" />
+          <NavigationProperty Name="proje" Relationship="Self.FK__gorevlend__proje__2D27B809" FromRole="gorevlendirme" ToRole="proje" />
+        </EntityType>
+        <EntityType Name="il">
+          <Key>
+            <PropertyRef Name="il_no" />
+          </Key>
+          <Property Name="il_no" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="il_ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ilces" Relationship="Self.FK__ilce__il_no__1BFD2C07" FromRole="il" ToRole="ilce" />
+        </EntityType>
+        <EntityType Name="ilce">
+          <Key>
+            <PropertyRef Name="ilce_no" />
+          </Key>
+          <Property Name="ilce_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ilce_ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="il_no" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="cocuks" Relationship="Self.FK__cocuk__dogu_yeri__286302EC" FromRole="ilce" ToRole="cocuk" />
+          <NavigationProperty Name="il" Relationship="Self.FK__ilce__il_no__1BFD2C07" FromRole="ilce" ToRole="il" />
+          <NavigationProperty Name="personels" Relationship="Self.FK__personel__dogum___21B6055D" FromRole="ilce" ToRole="personel" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="KategoriID" />
+          </Key>
+          <Property Name="KategoriID" Type="Int32" Nullable="false" />
+          <Property Name="KategoriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tanim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Urunlers" Relationship="Self.FK_Urunler_Kategoriler" FromRole="Kategoriler" ToRole="Urunler" />
+          <NavigationProperty Name="Urunlers1" Relationship="Self.FK_Urunler_Kategoriler1" FromRole="Kategoriler" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="personel">
+          <Key>
+            <PropertyRef Name="personel_no" />
+          </Key>
+          <Property Name="personel_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soyad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cinsiyet" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="dogum_tarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dogum_yeri" Type="Int32" Nullable="false" />
+          <Property Name="baslama_tarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="birim_no" Type="Int32" Nullable="false" />
+          <Property Name="unvan_no" Type="Int32" Nullable="false" />
+          <Property Name="calisma_saati" Type="Byte" Nullable="false" />
+          <Property Name="maas" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="prim" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="birim" Relationship="Self.FK__personel__birim___22AA2996" FromRole="personel" ToRole="birim" />
+          <NavigationProperty Name="cocuks" Relationship="Self.FK__cocuk__personel___29572725" FromRole="personel" ToRole="cocuk" />
+          <NavigationProperty Name="gorevlendirmes" Relationship="Self.FK__gorevlend__perso__2E1BDC42" FromRole="personel" ToRole="gorevlendirme" />
+          <NavigationProperty Name="ilce" Relationship="Self.FK__personel__dogum___21B6055D" FromRole="personel" ToRole="ilce" />
+          <NavigationProperty Name="unvan" Relationship="Self.FK__personel__unvan___239E4DCF" FromRole="personel" ToRole="unvan" />
+        </EntityType>
+        <EntityType Name="proje">
+          <Key>
+            <PropertyRef Name="proje_no" />
+          </Key>
+          <Property Name="proje_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="proje_ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="baslama_tarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="planlanan_bitis_tarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="gorevlendirmes" Relationship="Self.FK__gorevlend__proje__2D27B809" FromRole="proje" ToRole="gorevlendirme" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tedarikciler">
+          <Key>
+            <PropertyRef Name="TedarikciID" />
+          </Key>
+          <Property Name="TedarikciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SirketAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MusteriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Sehir" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Urunlers" Relationship="Self.FK_Urunler_Tedarikciler" FromRole="Tedarikciler" ToRole="Urunler" />
+        </EntityType>
+        <EntityType Name="unvan">
+          <Key>
+            <PropertyRef Name="unvan_no" />
+          </Key>
+          <Property Name="unvan_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="unvan_ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="personels" Relationship="Self.FK__personel__unvan___239E4DCF" FromRole="unvan" ToRole="personel" />
+        </EntityType>
+        <EntityType Name="Urunler">
+          <Key>
+            <PropertyRef Name="UrunID" />
+          </Key>
+          <Property Name="UrunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrunAdi" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="TedarikciID" Type="Int32" />
+          <Property Name="KategoriID" Type="Int32" />
+          <Property Name="BirimFiyati" Type="Int32" />
+          <NavigationProperty Name="Kategoriler" Relationship="Self.FK_Urunler_Kategoriler" FromRole="Urunler" ToRole="Kategoriler" />
+          <NavigationProperty Name="Kategoriler1" Relationship="Self.FK_Urunler_Kategoriler1" FromRole="Urunler" ToRole="Kategoriler" />
+          <NavigationProperty Name="Tedarikciler" Relationship="Self.FK_Urunler_Tedarikciler" FromRole="Urunler" ToRole="Tedarikciler" />
+        </EntityType>
+        <Association Name="FK__personel__birim___22AA2996">
+          <End Role="birim" Type="Self.birim" Multiplicity="1" />
+          <End Role="personel" Type="Self.personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="birim">
+              <PropertyRef Name="birim_no" />
+            </Principal>
+            <Dependent Role="personel">
+              <PropertyRef Name="birim_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cocuk__dogu_yeri__286302EC">
+          <End Role="ilce" Type="Self.ilce" Multiplicity="1" />
+          <End Role="cocuk" Type="Self.cocuk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ilce">
+              <PropertyRef Name="ilce_no" />
+            </Principal>
+            <Dependent Role="cocuk">
+              <PropertyRef Name="dogu_yeri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cocuk__personel___29572725">
+          <End Role="personel" Type="Self.personel" Multiplicity="1" />
+          <End Role="cocuk" Type="Self.cocuk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personel">
+              <PropertyRef Name="personel_no" />
+            </Principal>
+            <Dependent Role="cocuk">
+              <PropertyRef Name="personel_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__gorevlend__perso__2E1BDC42">
+          <End Role="personel" Type="Self.personel" Multiplicity="1" />
+          <End Role="gorevlendirme" Type="Self.gorevlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personel">
+              <PropertyRef Name="personel_no" />
+            </Principal>
+            <Dependent Role="gorevlendirme">
+              <PropertyRef Name="personel_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__gorevlend__proje__2D27B809">
+          <End Role="proje" Type="Self.proje" Multiplicity="1" />
+          <End Role="gorevlendirme" Type="Self.gorevlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proje">
+              <PropertyRef Name="proje_no" />
+            </Principal>
+            <Dependent Role="gorevlendirme">
+              <PropertyRef Name="proje_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ilce__il_no__1BFD2C07">
+          <End Role="il" Type="Self.il" Multiplicity="1" />
+          <End Role="ilce" Type="Self.ilce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="il">
+              <PropertyRef Name="il_no" />
+            </Principal>
+            <Dependent Role="ilce">
+              <PropertyRef Name="il_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__personel__dogum___21B6055D">
+          <End Role="ilce" Type="Self.ilce" Multiplicity="1" />
+          <End Role="personel" Type="Self.personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ilce">
+              <PropertyRef Name="ilce_no" />
+            </Principal>
+            <Dependent Role="personel">
+              <PropertyRef Name="dogum_yeri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Kategoriler">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="0..1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="KategoriID" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="TedarikciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Kategoriler1">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="0..1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="KategoriID" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__personel__unvan___239E4DCF">
+          <End Role="unvan" Type="Self.unvan" Multiplicity="1" />
+          <End Role="personel" Type="Self.personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unvan">
+              <PropertyRef Name="unvan_no" />
+            </Principal>
+            <Dependent Role="personel">
+              <PropertyRef Name="unvan_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Tedarikciler">
+          <End Role="Tedarikciler" Type="Self.Tedarikciler" Multiplicity="0..1" />
+          <End Role="Urunler" Type="Self.Urunler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tedarikciler">
+              <PropertyRef Name="TedarikciID" />
+            </Principal>
+            <Dependent Role="Urunler">
+              <PropertyRef Name="TedarikciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sirketEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="birims" EntityType="Self.birim" />
+          <EntitySet Name="cocuks" EntityType="Self.cocuk" />
+          <EntitySet Name="gorevlendirmes" EntityType="Self.gorevlendirme" />
+          <EntitySet Name="ils" EntityType="Self.il" />
+          <EntitySet Name="ilces" EntityType="Self.ilce" />
+          <EntitySet Name="Kategorilers" EntityType="Self.Kategoriler" />
+          <EntitySet Name="personels" EntityType="Self.personel" />
+          <EntitySet Name="projes" EntityType="Self.proje" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Tedarikcilers" EntityType="Self.Tedarikciler" />
+          <EntitySet Name="unvans" EntityType="Self.unvan" />
+          <EntitySet Name="Urunlers" EntityType="Self.Urunler" />
+          <AssociationSet Name="FK__personel__birim___22AA2996" Association="Self.FK__personel__birim___22AA2996">
+            <End Role="birim" EntitySet="birims" />
+            <End Role="personel" EntitySet="personels" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cocuk__dogu_yeri__286302EC" Association="Self.FK__cocuk__dogu_yeri__286302EC">
+            <End Role="ilce" EntitySet="ilces" />
+            <End Role="cocuk" EntitySet="cocuks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cocuk__personel___29572725" Association="Self.FK__cocuk__personel___29572725">
+            <End Role="personel" EntitySet="personels" />
+            <End Role="cocuk" EntitySet="cocuks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__gorevlend__perso__2E1BDC42" Association="Self.FK__gorevlend__perso__2E1BDC42">
+            <End Role="personel" EntitySet="personels" />
+            <End Role="gorevlendirme" EntitySet="gorevlendirmes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__gorevlend__proje__2D27B809" Association="Self.FK__gorevlend__proje__2D27B809">
+            <End Role="proje" EntitySet="projes" />
+            <End Role="gorevlendirme" EntitySet="gorevlendirmes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ilce__il_no__1BFD2C07" Association="Self.FK__ilce__il_no__1BFD2C07">
+            <End Role="il" EntitySet="ils" />
+            <End Role="ilce" EntitySet="ilces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__personel__dogum___21B6055D" Association="Self.FK__personel__dogum___21B6055D">
+            <End Role="ilce" EntitySet="ilces" />
+            <End Role="personel" EntitySet="personels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Kategoriler" Association="Self.FK_Urunler_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategorilers" />
+            <End Role="Urunler" EntitySet="Urunlers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Kategoriler1" Association="Self.FK_Urunler_Kategoriler1">
+            <End Role="Kategoriler" EntitySet="Kategorilers" />
+            <End Role="Urunler" EntitySet="Urunlers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__personel__unvan___239E4DCF" Association="Self.FK__personel__unvan___239E4DCF">
+            <End Role="unvan" EntitySet="unvans" />
+            <End Role="personel" EntitySet="personels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Tedarikciler" Association="Self.FK_Urunler_Tedarikciler">
+            <End Role="Tedarikciler" EntitySet="Tedarikcilers" />
+            <End Role="Urunler" EntitySet="Urunlers" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="spgeturun" ReturnType="Collection(sirketModel.spgeturun_Result)" />
+          <FunctionImport Name="spguncelle">
+            <Parameter Name="vurunid" Mode="In" Type="Int32" />
+            <Parameter Name="vurunadi" Mode="In" Type="String" />
+            <Parameter Name="vtedid" Mode="In" Type="Int32" />
+            <Parameter Name="vkatid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spurunara" ReturnType="Collection(sirketModel.spurunara_Result)">
+            <Parameter Name="urunadi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spurunekle">
+            <Parameter Name="vurunad" Mode="In" Type="String" />
+            <Parameter Name="vtedid" Mode="In" Type="Int32" />
+            <Parameter Name="vkatid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spurunsilme">
+            <Parameter Name="vurunid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spgeturun_Result">
+          <Property Type="Int32" Name="UrunID" Nullable="false" />
+          <Property Type="String" Name="UrunAdi" Nullable="true" MaxLength="40" />
+          <Property Type="Int32" Name="TedarikciID" Nullable="true" />
+          <Property Type="Int32" Name="KategoriID" Nullable="true" />
+          <Property Type="Int32" Name="BirimFiyati" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spurunara_Result">
+          <Property Type="Int32" Name="UrunID" Nullable="false" />
+          <Property Type="String" Name="UrunAdi" Nullable="true" MaxLength="40" />
+          <Property Type="Int32" Name="TedarikciID" Nullable="true" />
+          <Property Type="Int32" Name="KategoriID" Nullable="true" />
+          <Property Type="Int32" Name="BirimFiyati" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sirketModelStoreContainer" CdmEntityContainer="sirketEntities">
+          <EntitySetMapping Name="birims">
+            <EntityTypeMapping TypeName="sirketModel.birim">
+              <MappingFragment StoreEntitySet="birim">
+                <ScalarProperty Name="birim_no" ColumnName="birim_no" />
+                <ScalarProperty Name="birim_ad" ColumnName="birim_ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cocuks">
+            <EntityTypeMapping TypeName="sirketModel.cocuk">
+              <MappingFragment StoreEntitySet="cocuk">
+                <ScalarProperty Name="cocuk_no" ColumnName="cocuk_no" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+                <ScalarProperty Name="dogum_tarihi" ColumnName="dogum_tarihi" />
+                <ScalarProperty Name="dogu_yeri" ColumnName="dogu_yeri" />
+                <ScalarProperty Name="personel_no" ColumnName="personel_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gorevlendirmes">
+            <EntityTypeMapping TypeName="sirketModel.gorevlendirme">
+              <MappingFragment StoreEntitySet="gorevlendirme">
+                <ScalarProperty Name="gorevlendirme_no" ColumnName="gorevlendirme_no" />
+                <ScalarProperty Name="proje_no" ColumnName="proje_no" />
+                <ScalarProperty Name="personel_no" ColumnName="personel_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ils">
+            <EntityTypeMapping TypeName="sirketModel.il">
+              <MappingFragment StoreEntitySet="il">
+                <ScalarProperty Name="il_no" ColumnName="il_no" />
+                <ScalarProperty Name="il_ad" ColumnName="il_ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ilces">
+            <EntityTypeMapping TypeName="sirketModel.ilce">
+              <MappingFragment StoreEntitySet="ilce">
+                <ScalarProperty Name="ilce_no" ColumnName="ilce_no" />
+                <ScalarProperty Name="ilce_ad" ColumnName="ilce_ad" />
+                <ScalarProperty Name="il_no" ColumnName="il_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategorilers">
+            <EntityTypeMapping TypeName="sirketModel.Kategoriler">
+              <MappingFragment StoreEntitySet="Kategoriler">
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="KategoriAdi" ColumnName="KategoriAdi" />
+                <ScalarProperty Name="Tanim" ColumnName="Tanim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personels">
+            <EntityTypeMapping TypeName="sirketModel.personel">
+              <MappingFragment StoreEntitySet="personel">
+                <ScalarProperty Name="personel_no" ColumnName="personel_no" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="cinsiyet" ColumnName="cinsiyet" />
+                <ScalarProperty Name="dogum_tarihi" ColumnName="dogum_tarihi" />
+                <ScalarProperty Name="dogum_yeri" ColumnName="dogum_yeri" />
+                <ScalarProperty Name="baslama_tarihi" ColumnName="baslama_tarihi" />
+                <ScalarProperty Name="birim_no" ColumnName="birim_no" />
+                <ScalarProperty Name="unvan_no" ColumnName="unvan_no" />
+                <ScalarProperty Name="calisma_saati" ColumnName="calisma_saati" />
+                <ScalarProperty Name="maas" ColumnName="maas" />
+                <ScalarProperty Name="prim" ColumnName="prim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projes">
+            <EntityTypeMapping TypeName="sirketModel.proje">
+              <MappingFragment StoreEntitySet="proje">
+                <ScalarProperty Name="proje_no" ColumnName="proje_no" />
+                <ScalarProperty Name="proje_ad" ColumnName="proje_ad" />
+                <ScalarProperty Name="baslama_tarihi" ColumnName="baslama_tarihi" />
+                <ScalarProperty Name="planlanan_bitis_tarihi" ColumnName="planlanan_bitis_tarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="sirketModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tedarikcilers">
+            <EntityTypeMapping TypeName="sirketModel.Tedarikciler">
+              <MappingFragment StoreEntitySet="Tedarikciler">
+                <ScalarProperty Name="TedarikciID" ColumnName="TedarikciID" />
+                <ScalarProperty Name="SirketAdi" ColumnName="SirketAdi" />
+                <ScalarProperty Name="MusteriAdi" ColumnName="MusteriAdi" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Sehir" ColumnName="Sehir" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="unvans">
+            <EntityTypeMapping TypeName="sirketModel.unvan">
+              <MappingFragment StoreEntitySet="unvan">
+                <ScalarProperty Name="unvan_no" ColumnName="unvan_no" />
+                <ScalarProperty Name="unvan_ad" ColumnName="unvan_ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Urunlers">
+            <EntityTypeMapping TypeName="sirketModel.Urunler">
+              <MappingFragment StoreEntitySet="Urunler">
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="TedarikciID" ColumnName="TedarikciID" />
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="BirimFiyati" ColumnName="BirimFiyati" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="sirketModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="sirketModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="sirketModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="sirketModel.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="sirketModel.Store.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="sirketModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="sirketModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="spgeturun" FunctionName="sirketModel.Store.spgeturun">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sirketModel.spgeturun_Result">
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="TedarikciID" ColumnName="TedarikciID" />
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="BirimFiyati" ColumnName="BirimFiyati" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spguncelle" FunctionName="sirketModel.Store.spguncelle" />
+          <FunctionImportMapping FunctionImportName="spurunara" FunctionName="sirketModel.Store.spurunara">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sirketModel.spurunara_Result">
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="TedarikciID" ColumnName="TedarikciID" />
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="BirimFiyati" ColumnName="BirimFiyati" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spurunekle" FunctionName="sirketModel.Store.spurunekle" />
+          <FunctionImportMapping FunctionImportName="spurunsilme" FunctionName="sirketModel.Store.spurunsilme" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

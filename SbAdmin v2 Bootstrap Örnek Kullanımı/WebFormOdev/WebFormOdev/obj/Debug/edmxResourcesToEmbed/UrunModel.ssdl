@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ortaduzeyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kategoriler">
+    <Key>
+      <PropertyRef Name="kategoriid" />
+    </Key>
+    <Property Name="kategoriid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kategoriadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="acıklama" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Musteriler">
+    <Key>
+      <PropertyRef Name="musteriid" />
+    </Key>
+    <Property Name="musteriid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="musteriadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="adres" Type="nvarchar" MaxLength="50" />
+    <Property Name="sehir" Type="nvarchar" MaxLength="50" />
+    <Property Name="bolge" Type="nvarchar" MaxLength="50" />
+    <Property Name="postakodu" Type="nvarchar" MaxLength="50" />
+    <Property Name="ulke" Type="nvarchar" MaxLength="50" />
+    <Property Name="telefon" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ortaduzey.dbo.Nakliyeciler' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Nakliyeciler">
+    <Key>
+      <PropertyRef Name="nakliyeciid" />
+    </Key>
+    <Property Name="nakliyeciid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sirketadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="telefon" Type="nchar" MaxLength="11" />
+  </EntityType>
+  <EntityType Name="Personeller">
+    <Key>
+      <PropertyRef Name="personelid" />
+    </Key>
+    <Property Name="personelid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="personelad" Type="nvarchar" MaxLength="50" />
+    <Property Name="personelsoyad" Type="nvarchar" MaxLength="50" />
+    <Property Name="adres" Type="nvarchar" MaxLength="50" />
+    <Property Name="sehir" Type="nvarchar" MaxLength="50" />
+    <Property Name="bolge" Type="nvarchar" MaxLength="50" />
+    <Property Name="postakodu" Type="nvarchar" MaxLength="50" />
+    <Property Name="ulke" Type="nvarchar" MaxLength="50" />
+    <Property Name="telefon" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ortaduzey.dbo.SiparisDetay' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="SiparisDetay">
+    <Key>
+      <PropertyRef Name="siparisid" />
+    </Key>
+    <Property Name="siparisid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urunid" Type="int" />
+    <Property Name="miktar" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Siparisler">
+    <Key>
+      <PropertyRef Name="siparisid" />
+    </Key>
+    <Property Name="siparisid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="musteriid" Type="nchar" MaxLength="10" />
+    <Property Name="personelid" Type="int" />
+    <Property Name="siparistarihi" Type="datetime" />
+    <Property Name="odemetarihi" Type="datetime" />
+    <Property Name="nakliyeucreti" Type="money" />
+    <Property Name="siparisadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="adres" Type="nvarchar" MaxLength="50" />
+    <Property Name="sehir" Type="nvarchar" MaxLength="50" />
+    <Property Name="bolge" Type="nvarchar" MaxLength="50" />
+    <Property Name="postakodu" Type="nvarchar" MaxLength="50" />
+    <Property Name="ulke" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tedarikciler">
+    <Key>
+      <PropertyRef Name="tedarikciid" />
+    </Key>
+    <Property Name="tedarikciid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sirketadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="adres" Type="nvarchar" MaxLength="50" />
+    <Property Name="sehir" Type="nvarchar" MaxLength="50" />
+    <Property Name="bolge" Type="nvarchar" MaxLength="50" />
+    <Property Name="postakodu" Type="nvarchar" MaxLength="50" />
+    <Property Name="ulke" Type="nvarchar" MaxLength="50" />
+    <Property Name="telefon" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Urunler">
+    <Key>
+      <PropertyRef Name="urunid" />
+    </Key>
+    <Property Name="urunid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urunadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="tedarikciid" Type="int" Nullable="false" />
+    <Property Name="kategoriid" Type="int" Nullable="false" />
+    <Property Name="birimfiyat" Type="money" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Nakliyeciler_Siparisler">
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="1" />
+    <End Role="Nakliyeciler" Type="Self.Nakliyeciler" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Siparisler">
+        <PropertyRef Name="siparisid" />
+      </Principal>
+      <Dependent Role="Nakliyeciler">
+        <PropertyRef Name="nakliyeciid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SiparisDetay_Siparisler">
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="1" />
+    <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Siparisler">
+        <PropertyRef Name="siparisid" />
+      </Principal>
+      <Dependent Role="SiparisDetay">
+        <PropertyRef Name="siparisid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SiparisDetay_Urunler">
+    <End Role="Urunler" Type="Self.Urunler" Multiplicity="0..1" />
+    <End Role="SiparisDetay" Type="Self.SiparisDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Urunler">
+        <PropertyRef Name="urunid" />
+      </Principal>
+      <Dependent Role="SiparisDetay">
+        <PropertyRef Name="urunid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparisler_Musteriler">
+    <End Role="Musteriler" Type="Self.Musteriler" Multiplicity="1" />
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Musteriler">
+        <PropertyRef Name="musteriid" />
+      </Principal>
+      <Dependent Role="Siparisler">
+        <PropertyRef Name="siparisid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Siparisler_Personeller">
+    <End Role="Personeller" Type="Self.Personeller" Multiplicity="0..1" />
+    <End Role="Siparisler" Type="Self.Siparisler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personeller">
+        <PropertyRef Name="personelid" />
+      </Principal>
+      <Dependent Role="Siparisler">
+        <PropertyRef Name="personelid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spgeturun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spguncelle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="urunid" Type="int" Mode="In" />
+    <Parameter Name="urunadi" Type="nvarchar" Mode="In" />
+    <Parameter Name="tedarikciid" Type="int" Mode="In" />
+    <Parameter Name="kategoriid" Type="int" Mode="In" />
+    <Parameter Name="birimfiyat" Type="money" Mode="In" />
+  </Function>
+  <Function Name="spurunara" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="urunadi" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="spurunekle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="urunadi" Type="nvarchar" Mode="In" />
+    <Parameter Name="kategoriid" Type="int" Mode="In" />
+    <Parameter Name="tedarikciid" Type="int" Mode="In" />
+    <Parameter Name="birimfiyat" Type="money" Mode="In" />
+  </Function>
+  <Function Name="spurunsilme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="urunid" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="ortaduzeyModelStoreContainer">
+    <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Musteriler" EntityType="Self.Musteriler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Personeller" EntityType="Self.Personeller" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Siparisler" EntityType="Self.Siparisler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tedarikciler" EntityType="Self.Tedarikciler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urunler" EntityType="Self.Urunler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nakliyeciler" EntityType="Self.Nakliyeciler" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Nakliyeciler].[nakliyeciid] AS [nakliyeciid], 
+    [Nakliyeciler].[sirketadi] AS [sirketadi], 
+    [Nakliyeciler].[telefon] AS [telefon]
+    FROM [dbo].[Nakliyeciler] AS [Nakliyeciler]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="SiparisDetay" EntityType="Self.SiparisDetay" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [SiparisDetay].[siparisid] AS [siparisid], 
+    [SiparisDetay].[urunid] AS [urunid], 
+    [SiparisDetay].[miktar] AS [miktar]
+    FROM [dbo].[SiparisDetay] AS [SiparisDetay]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Nakliyeciler_Siparisler" Association="Self.FK_Nakliyeciler_Siparisler">
+      <End Role="Siparisler" EntitySet="Siparisler" />
+      <End Role="Nakliyeciler" EntitySet="Nakliyeciler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SiparisDetay_Siparisler" Association="Self.FK_SiparisDetay_Siparisler">
+      <End Role="Siparisler" EntitySet="Siparisler" />
+      <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SiparisDetay_Urunler" Association="Self.FK_SiparisDetay_Urunler">
+      <End Role="Urunler" EntitySet="Urunler" />
+      <End Role="SiparisDetay" EntitySet="SiparisDetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparisler_Musteriler" Association="Self.FK_Siparisler_Musteriler">
+      <End Role="Musteriler" EntitySet="Musteriler" />
+      <End Role="Siparisler" EntitySet="Siparisler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Siparisler_Personeller" Association="Self.FK_Siparisler_Personeller">
+      <End Role="Personeller" EntitySet="Personeller" />
+      <End Role="Siparisler" EntitySet="Siparisler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
